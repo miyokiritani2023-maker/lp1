@@ -52,116 +52,64 @@
           margin: 0;
           padding: 0;
           background-color: #e2e8f0;
-          overflow: hidden;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          min-height: 100vh;
+          overflow-x: hidden;
+          overflow-y: auto;
         }
         
-        /* Container to hold and scale slides */
-        .slides-wrapper {
-          position: relative;
-          width: 1280px;
-          height: 720px;
-          transform-origin: center center;
+        /* Container to hold sections */
+        .lp-wrapper {
+          width: 100%;
+          max-width: 1280px;
+          margin: 0 auto;
+          padding: 40px 20px;
         }
         
-        /* スライドの基本容器 */
-        .slide-container {
-          width: 1280px;
-          height: 720px;
+        /* セクションの基本容器 */
+        .section-container {
+          width: 100%;
+          max-width: 1280px;
+          min-height: 600px;
           background: var(--bg-white);
           color: var(--text-main);
-          position: absolute;
-          left: 0;
-          top: 0;
-          overflow: hidden;
+          position: relative;
+          margin: 0 auto 40px auto;
           display: flex;
           flex-direction: column;
           box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
           background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
           background-size: 32px 32px;
-          opacity: 0;
-          transition: opacity 0.3s ease-in-out;
           padding: 60px 80px;
           box-sizing: border-box;
-        }
-        
-        .slide-container.active {
-          opacity: 1;
-          z-index: 10;
-        }
-        
-        /* Navigation Controls */
-        .nav-controls {
-          position: fixed;
-          top: 50%;
-          left: 0;
-          right: 0;
-          transform: translateY(-50%);
-          display: flex;
-          justify-content: space-between;
-          padding: 0 20px;
-          pointer-events: none;
-          z-index: 2000;
-        }
-        
-        .nav-btn {
-          background: rgba(0, 123, 138, 0.9);
-          color: white;
-          border: none;
-          width: 60px;
-          height: 60px;
-          border-radius: 50%;
-          cursor: pointer;
-          font-size: 28px;
-          font-weight: 900;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 4px 15px rgba(0, 123, 138, 0.4);
-          transition: all 0.2s;
-          font-family: Arial, sans-serif;
-          pointer-events: all;
-          backdrop-filter: blur(10px);
-        }
-        
-        .nav-btn:hover {
-          background: var(--brand-dark);
-          transform: scale(1.1);
-        }
-        
-        .nav-btn:disabled {
-          background: #cbd5e1;
-          cursor: not-allowed;
-          transform: scale(1);
-        }
-        
-        .slide-indicator {
-          position: fixed;
-          top: 30px;
-          right: 40px;
-          background: rgba(30, 41, 59, 0.9);
-          color: white;
-          padding: 10px 20px;
           border-radius: 20px;
-          font-family: 'Roboto Mono', monospace;
-          font-size: 14px;
-          font-weight: 700;
-          z-index: 2000;
-          backdrop-filter: blur(10px);
         }
+        
+        @media (max-width: 768px) {
+          .section-container {
+            padding: 40px 30px;
+            margin-bottom: 30px;
+          }
+        }
+        
+        /* Navigation removed for LP style */
+        
+        /* Slide indicator removed for LP style */
         
         /* Slide 1 specific */
-        #slide1 .text-section {
+        #section1 .text-section {
             width: 55%;
             padding-left: 20px;
             z-index: 10;
             flex-shrink: 0;
         }
         
-        #slide1 .service-title {
+        @media (max-width: 768px) {
+            #section1 { flex-direction: column !important; }
+            #section1 .text-section { width: 100%; padding-left: 0; text-align: center; }
+            #section1 .visual-section { width: 100%; margin-top: 30px; }
+            #section1 .service-title { font-size: 48px; }
+        }
+        
+        #section1 .service-title {
             font-size: 84px;
             font-weight: 900;
             line-height: 1.1;
@@ -169,11 +117,11 @@
             letter-spacing: -0.02em;
         }
         
-        #slide1 .highlight {
+        #section1 .highlight {
             color: #007B8A;
         }
         
-        #slide1 .sub-phrase {
+        #section1 .sub-phrase {
             font-family: 'Roboto Mono', monospace;
             font-size: 24px;
             color: #94a3b8;
@@ -182,7 +130,7 @@
             text-transform: uppercase;
         }
         
-        #slide1 .visual-section {
+        #section1 .visual-section {
             width: 45%;
             height: 100%;
             display: flex;
@@ -193,7 +141,7 @@
             padding-right: 0;
         }
         
-        #slide1 .illustration-placeholder {
+        #section1 .illustration-placeholder {
             width: 90%;
             height: 70%;
             background-color: rgba(0, 123, 138, 0.03);
@@ -207,75 +155,96 @@
         }
         
         /* Slide 2 specific */
-        #slide2 .text-section { width: 50%; padding-left: 0; z-index: 10; }
-        #slide2 .main-copy { font-family: 'Noto Sans JP', sans-serif; font-size: 58px; font-weight: 900; line-height: 1.2; color: #1e293b; }
-        #slide2 .result-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 32px; margin-top: 30px; width: 540px; }
+        #section2 .text-section { width: 50%; padding-left: 0; z-index: 10; }
+        #section2 .main-copy { font-family: 'Noto Sans JP', sans-serif; font-size: 58px; font-weight: 900; line-height: 1.2; color: #1e293b; }
+        #section2 .result-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 32px; margin-top: 30px; width: 100%; max-width: 540px; }
         
-        #slide2 .badge { font-family: 'Roboto Mono'; font-size: 12px; font-weight: 900; padding: 2px 10px; border-radius: 4px; margin-right: 14px; }
-        #slide2 .bg-good { background: #dcfce7; color: #16a34a; }
-        #slide2 .bg-more { background: #fee2e2; color: #ef4444; }
+        @media (max-width: 768px) {
+            #section2 { flex-direction: column !important; }
+            #section2 .text-section { width: 100%; }
+            #section2 .visual-section { width: 100%; margin-top: 30px; }
+            #section2 .main-copy { font-size: 36px; }
+        }
         
-        #slide2 .visual-section { width: 50%; display: flex; justify-content: center; align-items: center; }
-        #slide2 .radar-poly { fill: rgba(239, 68, 68, 0.25); stroke: #ef4444; stroke-width: 6; stroke-linejoin: round; }
-        #slide2 .grid-line { stroke: #cbd5e1; stroke-width: 1.5; }
-        #slide2 .label-text { font-family: 'Noto Sans JP'; font-weight: 900; font-size: 18px; fill: #64748b; }
+        #section2 .badge { font-family: 'Roboto Mono'; font-size: 12px; font-weight: 900; padding: 2px 10px; border-radius: 4px; margin-right: 14px; }
+        #section2 .bg-good { background: #dcfce7; color: #16a34a; }
+        #section2 .bg-more { background: #fee2e2; color: #ef4444; }
+        
+        #section2 .visual-section { width: 50%; display: flex; justify-content: center; align-items: center; }
+        #section2 .radar-poly { fill: rgba(239, 68, 68, 0.25); stroke: #ef4444; stroke-width: 6; stroke-linejoin: round; }
+        #section2 .grid-line { stroke: #cbd5e1; stroke-width: 1.5; }
+        #section2 .label-text { font-family: 'Noto Sans JP'; font-weight: 900; font-size: 18px; fill: #64748b; }
         
         /* Slide 3 specific */
-        #slide3 .text-section { width: 50%; padding-left: 0; z-index: 10; }
-        #slide3 .visual-section { width: 50%; display: flex; justify-content: center; align-items: center; }
+        #section3 .text-section { width: 50%; padding-left: 0; z-index: 10; }
+        #section3 .visual-section { width: 50%; display: flex; justify-content: center; align-items: center; }
         
-        #slide3 .main-copy { font-family: 'Noto Sans JP'; font-size: 54px; font-weight: 900; line-height: 1.3; color: #1e293b; }
-        #slide3 .highlight { color: #007B8A; }
+        #section3 .main-copy { font-family: 'Noto Sans JP'; font-size: 54px; font-weight: 900; line-height: 1.3; color: #1e293b; }
+        #section3 .highlight { color: #007B8A; }
         
-        #slide3 .result-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 28px; margin-top: 30px; width: 540px; }
-        #slide3 .badge { font-family: 'Roboto Mono'; font-size: 12px; font-weight: 900; padding: 2px 10px; border-radius: 4px; margin-right: 14px; }
-        #slide3 .bg-good { background: #dcfce7; color: #16a34a; }
-        #slide3 .bg-more { background: #fee2e2; color: #ef4444; }
+        #section3 .result-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 28px; margin-top: 30px; width: 100%; max-width: 540px; }
         
-        #slide3 .party-window {
+        @media (max-width: 768px) {
+            #section3 { flex-direction: column !important; }
+            #section3 .text-section { width: 100%; }
+            #section3 .visual-section { width: 100%; margin-top: 30px; }
+            #section3 .main-copy { font-size: 36px; }
+        }
+        #section3 .badge { font-family: 'Roboto Mono'; font-size: 12px; font-weight: 900; padding: 2px 10px; border-radius: 4px; margin-right: 14px; }
+        #section3 .bg-good { background: #dcfce7; color: #16a34a; }
+        #section3 .bg-more { background: #fee2e2; color: #ef4444; }
+        
+        #section3 .party-window {
             background: #1e293b; border: 4px solid #334155; border-radius: 12px;
             width: 440px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
-        #slide3 .char-slot {
+        #section3 .char-slot {
             display: flex; align-items: center; background: #334155;
             border-radius: 8px; padding: 16px; margin-bottom: 16px; position: relative;
         }
-        #slide3 .char-slot.locked { background: #1e293b; border: 2px dashed #475569; }
+        #section3 .char-slot.locked { background: #1e293b; border: 2px dashed #475569; }
         
-        #slide3 .char-icon { width: 60px; height: 60px; background: #475569; border-radius: 4px; margin-right: 20px; display: flex; align-items: center; justify-content: center; }
-        #slide3 .char-info { font-family: 'Noto Sans JP'; }
-        #slide3 .char-name { font-weight: 900; color: #fff; font-size: 18px; }
-        #slide3 .char-status { font-size: 12px; color: #94a3b8; font-family: 'Roboto Mono'; }
-        #slide3 .lock-tag {
+        #section3 .char-icon { width: 60px; height: 60px; background: #475569; border-radius: 4px; margin-right: 20px; display: flex; align-items: center; justify-content: center; }
+        #section3 .char-info { font-family: 'Noto Sans JP'; }
+        #section3 .char-name { font-weight: 900; color: #fff; font-size: 18px; }
+        #section3 .char-status { font-size: 12px; color: #94a3b8; font-family: 'Roboto Mono'; }
+        #section3 .lock-tag {
             position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
             background: #ef4444; color: #fff; font-family: 'Roboto Mono';
             font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 900;
         }
         
         /* Slide 4 specific */
-        #slide4 .text-section { width: 50%; padding-left: 0; z-index: 10; }
-        #slide4 .visual-section { width: 50%; display: flex; justify-content: center; align-items: center; }
+        #section4 .text-section { width: 50%; padding-left: 0; z-index: 10; }
+        #section4 .visual-section { width: 50%; display: flex; justify-content: center; align-items: center; }
         
-        #slide4 .main-copy { font-family: 'Noto Sans JP'; font-size: 60px; font-weight: 900; line-height: 1.3; color: var(--text-dark); }
-        #slide4 .highlight { color: var(--brand-color); }
+        @media (max-width: 768px) {
+            #section4 { flex-direction: column !important; }
+            #section4 .text-section { width: 100%; }
+            #section4 .visual-section { width: 100%; margin-top: 30px; }
+            #section4 .main-copy { font-size: 36px; }
+        }
         
-        #slide4 .party-window {
+        #section4 .main-copy { font-family: 'Noto Sans JP'; font-size: 60px; font-weight: 900; line-height: 1.3; color: var(--text-dark); }
+        #section4 .highlight { color: var(--brand-color); }
+        
+        #section4 .party-window {
             background: var(--text-dark); border: 4px solid var(--brand-color); border-radius: 12px;
             width: 480px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             position: relative;
         }
-        #slide4 .char-slot {
+        #section4 .char-slot {
             display: flex; align-items: center; background: #334155;
             border-radius: 8px; padding: 16px; margin-bottom: 16px; position: relative;
         }
         
-        #slide4 .char-slot.active { 
+        #section4 .char-slot.active { 
             background: rgba(0, 123, 138, 0.2); 
             border: 2px solid var(--brand-color);
             animation: slideIn 0.8s ease-out;
         }
         
-        #slide4 .join-badge {
+        #section4 .join-badge {
             position: absolute; top: -10px; left: -10px;
             background: var(--accent-yellow); color: var(--text-dark);
             font-family: 'Roboto Mono'; font-weight: 900; font-size: 14px;
@@ -285,14 +254,14 @@
             animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s both;
         }
         
-        #slide4 .char-icon { width: 70px; height: 70px; border-radius: 4px; margin-right: 20px; display: flex; align-items: center; justify-content: center; }
-        #slide4 .char-icon.warrior { background: #475569; }
-        #slide4 .char-icon.mage { 
+        #section4 .char-icon { width: 70px; height: 70px; border-radius: 4px; margin-right: 20px; display: flex; align-items: center; justify-content: center; }
+        #section4 .char-icon.warrior { background: #475569; }
+        #section4 .char-icon.mage { 
             background: var(--brand-color); 
             box-shadow: 0 0 20px var(--brand-color);
         }
-        #slide4 .char-name { font-weight: 900; color: var(--text-light); font-size: 20px; }
-        #slide4 .char-status { font-size: 13px; color: #94a3b8; font-family: 'Roboto Mono'; }
+        #section4 .char-name { font-weight: 900; color: var(--text-light); font-size: 20px; }
+        #section4 .char-status { font-size: 13px; color: #94a3b8; font-family: 'Roboto Mono'; }
         
         @keyframes slideIn {
             from { opacity: 0; transform: translateX(50px); }
@@ -304,19 +273,25 @@
         }
         
         /* Slide 5 specific */
-        #slide5 .content-frame {
+        #section5 .content-frame {
             width: 100%; max-width: 1100px;
             display: flex; align-items: stretch;
             gap: 60px;
         }
         
-        #slide5 .left-profile-col {
+        @media (max-width: 768px) {
+            #section5 .content-frame { flex-direction: column; }
+            #section5 .left-profile-col { width: 100%; align-items: center; }
+            #section5 .right-status-col { width: 100%; }
+        }
+        
+        #section5 .left-profile-col {
             width: 350px;
             display: flex; flex-direction: column; align-items: flex-start;
             justify-content: center;
         }
         
-        #slide5 .photo-area {
+        #section5 .photo-area {
             width: 320px; height: 320px;
             background: #f1f5f9; border: 6px solid var(--brand-color);
             border-radius: 50%; margin-bottom: 30px;
@@ -324,58 +299,63 @@
             box-shadow: 0 20px 40px rgba(0,123,138,0.1);
         }
         
-        #slide5 .profile-name { font-family: 'Noto Sans JP'; font-size: 32px; font-weight: 900; color: var(--text-dark); margin-bottom: 4px; }
-        #slide5 .profile-title { font-family: 'Noto Sans JP'; font-size: 15px; font-weight: 700; color: var(--brand-color); margin-bottom: 16px; }
-        #slide5 .profile-bio { font-size: 13px; color: var(--text-muted); font-weight: 700; line-height: 1.7; margin-bottom: 20px; }
-        #slide5 .social-link {
+        #section5 .profile-name { font-family: 'Noto Sans JP'; font-size: 32px; font-weight: 900; color: var(--text-dark); margin-bottom: 4px; }
+        #section5 .profile-title { font-family: 'Noto Sans JP'; font-size: 15px; font-weight: 700; color: var(--brand-color); margin-bottom: 16px; }
+        #section5 .profile-bio { font-size: 13px; color: var(--text-muted); font-weight: 700; line-height: 1.7; margin-bottom: 20px; }
+        #section5 .social-link {
             display: inline-flex; align-items: center; gap: 8px;
             color: var(--brand-color); text-decoration: none; font-family: 'Roboto Mono'; font-size: 14px; font-weight: 900;
         }
         
-        #slide5 .right-status-col {
+        #section5 .right-status-col {
             flex: 1;
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
         }
         
-        #slide5 .radar-area { margin-bottom: 20px; }
-        #slide5 .radar-poly { fill: rgba(0, 123, 138, 0.2); stroke: var(--brand-color); stroke-width: 5; }
-        #slide5 .grid-line { stroke: #cbd5e1; stroke-width: 1; }
-        #slide5 .label-text { font-family: 'Noto Sans JP'; font-weight: 900; font-size: 12px; fill: #64748b; }
+        #section5 .radar-area { margin-bottom: 20px; }
+        #section5 .radar-poly { fill: rgba(0, 123, 138, 0.2); stroke: var(--brand-color); stroke-width: 5; }
+        #section5 .grid-line { stroke: #cbd5e1; stroke-width: 1; }
+        #section5 .label-text { font-family: 'Noto Sans JP'; font-weight: 900; font-size: 12px; fill: #64748b; }
         
-        #slide5 .stat-grid-in-col {
+        #section5 .stat-grid-in-col {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
             width: 100%;
         }
-        #slide5 .stat-card {
+        #section5 .stat-card {
             background: #1e293b; border-radius: 8px; padding: 16px;
             border-top: 4px solid var(--brand-color);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        #slide5 .stat-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
-        #slide5 .stat-label { font-family: 'Roboto Mono'; font-size: 12px; font-weight: 900; color: var(--brand-color); }
-        #slide5 .stat-value { font-family: 'Roboto Mono'; font-size: 10px; color: #94a3b8; }
-        #slide5 .stat-title { font-family: 'Noto Sans JP'; font-size: 13px; font-weight: 900; color: #fff; margin-bottom: 6px; }
-        #slide5 .stat-desc { font-family: 'Noto Sans JP'; font-size: 10px; font-weight: 700; color: #cbd5e1; line-height: 1.5; }
+        #section5 .stat-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        #section5 .stat-label { font-family: 'Roboto Mono'; font-size: 12px; font-weight: 900; color: var(--brand-color); }
+        #section5 .stat-value { font-family: 'Roboto Mono'; font-size: 10px; color: #94a3b8; }
+        #section5 .stat-title { font-family: 'Noto Sans JP'; font-size: 13px; font-weight: 900; color: #fff; margin-bottom: 6px; }
+        #section5 .stat-desc { font-family: 'Noto Sans JP'; font-size: 10px; font-weight: 700; color: #cbd5e1; line-height: 1.5; }
         
         /* Slide 6 specific */
-        #slide6 .main-title { font-family: 'Noto Sans JP'; font-size: 36px; font-weight: 900; color: var(--text-dark); margin-bottom: 30px; }
-        #slide6 .main-title span { color: var(--brand-color); text-shadow: 2px 2px 0px var(--brand-light); }
+        #section6 .main-title { font-family: 'Noto Sans JP'; font-size: 36px; font-weight: 900; color: var(--text-dark); margin-bottom: 30px; }
+        #section6 .main-title span { color: var(--brand-color); text-shadow: 2px 2px 0px var(--brand-light); }
         
-        #slide6 .comparison-table { width: 1040px; border-collapse: separate; border-spacing: 0 16px; }
+        #section6 .comparison-table { width: 100%; max-width: 1040px; border-collapse: separate; border-spacing: 0 16px; }
         
-        #slide6 .row-card td { padding: 20px 30px; background: #fff; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; position: relative; }
-        #slide6 .row-card td:first-child { border-left: 1px solid #e2e8f0; border-radius: 12px 0 0 12px; font-weight: 900; color: #64748b; background: #f8fafc; width: 180px; text-align: center; font-size: 14px; letter-spacing: 0.1em; }
-        #slide6 .row-card td:last-child { border-right: 1px solid #e2e8f0; border-radius: 0 12px 12px 0; }
+        @media (max-width: 768px) {
+            #section6 .comparison-table { max-width: 100%; }
+            #section6 .main-title { font-size: 28px; }
+        }
         
-        #slide6 .summon-col { 
+        #section6 .row-card td { padding: 20px 30px; background: #fff; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; position: relative; }
+        #section6 .row-card td:first-child { border-left: 1px solid #e2e8f0; border-radius: 12px 0 0 12px; font-weight: 900; color: #64748b; background: #f8fafc; width: 180px; text-align: center; font-size: 14px; letter-spacing: 0.1em; }
+        #section6 .row-card td:last-child { border-right: 1px solid #e2e8f0; border-radius: 0 12px 12px 0; }
+        
+        #section6 .summon-col { 
             background: linear-gradient(90deg, #f0fdfa 0%, #ffffff 100%) !important;
             border: 3px solid var(--brand-color) !important; 
             box-shadow: 0 0 20px rgba(0, 123, 138, 0.15);
             z-index: 1;
         }
         
-        #slide6 .rpg-badge {
+        #section6 .rpg-badge {
             position: relative;
             width: 42px; height: 42px;
             display: flex; align-items: center; justify-content: center;
@@ -388,136 +368,154 @@
             border: 2px solid rgba(255,255,255,0.5);
         }
         
-        #slide6 .rpg-badge::after {
+        #section6 .rpg-badge::after {
             content: ''; position: absolute; top: 2px; left: 2px; right: 2px; height: 50%;
             background: rgba(255,255,255,0.2); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 40%);
         }
-        #slide6 .badge-cheap { background: var(--color-cheap); box-shadow: 0 4px 0 #1d4ed8, 0 8px 15px rgba(59, 130, 246, 0.4); }
-        #slide6 .badge-fast { background: var(--color-fast); box-shadow: 0 4px 0 #b91c1c, 0 8px 15px rgba(239, 68, 68, 0.4); }
-        #slide6 .badge-easy { background: var(--color-easy); box-shadow: 0 4px 0 #047857, 0 8px 15px rgba(16, 185, 129, 0.4); }
-        #slide6 .item-title { font-size: 26px; font-weight: 900; margin-bottom: 2px; display: flex; align-items: center; gap: 15px; }
-        #slide6 .item-desc { font-size: 13px; color: #64748b; font-weight: 700; letter-spacing: 0.05em; }
-        #slide6 .brand-text { color: var(--brand-color); }
+        #section6 .badge-cheap { background: var(--color-cheap); box-shadow: 0 4px 0 #1d4ed8, 0 8px 15px rgba(59, 130, 246, 0.4); }
+        #section6 .badge-fast { background: var(--color-fast); box-shadow: 0 4px 0 #b91c1c, 0 8px 15px rgba(239, 68, 68, 0.4); }
+        #section6 .badge-easy { background: var(--color-easy); box-shadow: 0 4px 0 #047857, 0 8px 15px rgba(16, 185, 129, 0.4); }
+        #section6 .item-title { font-size: 26px; font-weight: 900; margin-bottom: 2px; display: flex; align-items: center; gap: 15px; }
+        #section6 .item-desc { font-size: 13px; color: #64748b; font-weight: 700; letter-spacing: 0.05em; }
+        #section6 .brand-text { color: var(--brand-color); }
         
-        #slide6 .price-banner {
+        #section6 .price-banner {
             margin-top: 20px; background: #1e293b; color: #fff;
             padding: 15px 40px; border-radius: 8px; border: 2px solid var(--brand-color);
             display: flex; align-items: center; gap: 30px;
         }
-        #slide6 .price-value { font-family: 'Roboto Mono'; font-size: 42px; font-weight: 900; color: var(--accent-yellow); text-shadow: 0 0 10px rgba(251, 191, 36, 0.3); }
+        #section6 .price-value { font-family: 'Roboto Mono'; font-size: 42px; font-weight: 900; color: var(--accent-yellow); text-shadow: 0 0 10px rgba(251, 191, 36, 0.3); }
         
         /* Slide 7 specific */
-        #slide7 .header-area { text-align: center; margin-bottom: 50px; }
-        #slide7 .main-title { font-family: 'Noto Sans JP'; font-size: 48px; font-weight: 900; color: var(--text-dark); }
-        #slide7 .main-title span { color: var(--brand-color); }
-        #slide7 .sub-title { font-weight: 700; color: #64748b; margin-top: 12px; font-size: 18px; }
+        #section7 .header-area { text-align: center; margin-bottom: 50px; }
+        #section7 .main-title { font-family: 'Noto Sans JP'; font-size: 48px; font-weight: 900; color: var(--text-dark); }
+        #section7 .main-title span { color: var(--brand-color); }
+        #section7 .sub-title { font-weight: 700; color: #64748b; margin-top: 12px; font-size: 18px; }
         
-        #slide7 .quest-line { display: flex; align-items: stretch; gap: 30px; width: 1100px; position: relative; }
-        #slide7 .quest-line::before {
+        #section7 .quest-line { display: flex; align-items: stretch; gap: 30px; width: 100%; max-width: 1100px; position: relative; }
+        
+        @media (max-width: 768px) {
+            #section7 .quest-line { flex-direction: column; }
+            #section7 .quest-line::before { display: none; }
+            #section7 .main-title { font-size: 32px; }
+        }
+        #section7 .quest-line::before {
             content: ''; position: absolute; top: 155px; left: 80px; right: 80px;
             height: 2px; background: #cbd5e1; z-index: 0;
         }
-        #slide7 .quest-card {
+        #section7 .quest-card {
             flex: 1; background: #fff; border: 2px solid #e2e8f0; border-radius: 12px; 
             padding: 30px 20px; position: relative; z-index: 1;
         }
-        #slide7 .quest-card.highlight { border: 3px solid var(--brand-color); box-shadow: 0 15px 30px rgba(0,123,138,0.08); }
-        #slide7 .quest-icon {
+        #section7 .quest-card.highlight { border: 3px solid var(--brand-color); box-shadow: 0 15px 30px rgba(0,123,138,0.08); }
+        #section7 .quest-icon {
             width: 60px; height: 60px; background: #f1f5f9; border-radius: 50%;
             margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;
             border: 4px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             font-family: 'Roboto Mono'; font-weight: 900; color: #94a3b8;
         }
-        #slide7 .quest-card.highlight .quest-icon { background: var(--brand-color); color: #fff; }
-        #slide7 .quest-phase { font-family: 'Roboto Mono'; font-size: 11px; font-weight: 900; color: var(--brand-color); text-align: center; margin-bottom: 6px; }
-        #slide7 .quest-title { font-family: 'Noto Sans JP'; font-size: 19px; font-weight: 900; color: var(--text-dark); text-align: center; margin-bottom: 20px; height: 54px; }
-        #slide7 .quest-log { background: #f8fafc; border-radius: 8px; padding: 15px; margin-bottom: 20px; min-height: 140px; }
-        #slide7 .log-item { display: flex; gap: 8px; font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 10px; line-height: 1.5; }
-        #slide7 .log-bullet { color: var(--brand-color); font-size: 14px; }
-        #slide7 .reward-box {
+        #section7 .quest-card.highlight .quest-icon { background: var(--brand-color); color: #fff; }
+        #section7 .quest-phase { font-family: 'Roboto Mono'; font-size: 11px; font-weight: 900; color: var(--brand-color); text-align: center; margin-bottom: 6px; }
+        #section7 .quest-title { font-family: 'Noto Sans JP'; font-size: 19px; font-weight: 900; color: var(--text-dark); text-align: center; margin-bottom: 20px; height: 54px; }
+        #section7 .quest-log { background: #f8fafc; border-radius: 8px; padding: 15px; margin-bottom: 20px; min-height: 140px; }
+        #section7 .log-item { display: flex; gap: 8px; font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 10px; line-height: 1.5; }
+        #section7 .log-bullet { color: var(--brand-color); font-size: 14px; }
+        #section7 .reward-box {
             background: #1e293b; color: var(--accent-yellow); padding: 12px; border-radius: 6px;
             font-size: 12px; font-weight: 900; text-align: center; border: 1px solid var(--accent-yellow);
         }
-        #slide7 .reward-box small { display: block; font-size: 10px; color: #fff; margin-bottom: 4px; opacity: 0.8; }
+        #section7 .reward-box small { display: block; font-size: 10px; color: #fff; margin-bottom: 4px; opacity: 0.8; }
         
         /* Slide 8 specific */
-        #slide8 .main-title { font-size: 42px; font-weight: 900; color: var(--text-dark); margin-bottom: 60px; text-align: center; width: 100%; }
-        #slide8 .main-title span { color: var(--brand-color); }
+        #section8 .main-title { font-size: 42px; font-weight: 900; color: var(--text-dark); margin-bottom: 60px; text-align: center; width: 100%; }
+        #section8 .main-title span { color: var(--brand-color); }
         
-        #slide8 .content-wrapper { display: flex; align-items: flex-start; justify-content: center; width: 1100px; gap: 80px; margin: 0 auto; }
+        #section8 .content-wrapper { display: flex; align-items: flex-start; justify-content: center; width: 100%; max-width: 1100px; gap: 80px; margin: 0 auto; }
         
-        #slide8 .chart-area { width: 380px; position: relative; flex-shrink: 0; }
+        @media (max-width: 768px) {
+            #section8 .content-wrapper { flex-direction: column; gap: 40px; }
+            #section8 .chart-area { width: 100%; }
+            #section8 .description-area { width: 100%; }
+            #section8 .main-title { font-size: 32px; }
+        }
         
-        #slide8 .label { position: absolute; font-size: 14px; font-weight: 900; color: #64748b; white-space: nowrap; line-height: 1.2; }
-        #slide8 .label b { display: block; font-family: 'Roboto Mono'; font-size: 20px; margin-bottom: 2px; }
+        #section8 .chart-area { width: 380px; position: relative; flex-shrink: 0; }
         
-        #slide8 .label.atk { top: -60px; left: 50%; transform: translateX(-50%); color: var(--president-red); text-align: center; }
-        #slide8 .label.spd { top: 70px; right: -80px; text-align: left; }
-        #slide8 .label.def { bottom: -10px; right: -50px; text-align: left; }
-        #slide8 .label.hp  { bottom: -10px; left: -50px; text-align: right; }
-        #slide8 .label.int { top: 70px; left: -80px; text-align: right; }
+        #section8 .label { position: absolute; font-size: 14px; font-weight: 900; color: #64748b; white-space: nowrap; line-height: 1.2; }
+        #section8 .label b { display: block; font-family: 'Roboto Mono'; font-size: 20px; margin-bottom: 2px; }
         
-        #slide8 .grid { fill: none; stroke: #e2e8f0; stroke-width: 1.5; }
-        #slide8 .poly-before { fill: rgba(239, 68, 68, 0.05); stroke: var(--president-red); stroke-width: 3; stroke-dasharray: 6; }
-        #slide8 .poly-after { fill: rgba(0, 123, 138, 0.2); stroke: var(--brand-color); stroke-width: 6; filter: drop-shadow(0 0 10px rgba(0, 123, 138, 0.3)); }
+        #section8 .label.atk { top: -60px; left: 50%; transform: translateX(-50%); color: var(--president-red); text-align: center; }
+        #section8 .label.spd { top: 70px; right: -80px; text-align: left; }
+        #section8 .label.def { bottom: -10px; right: -50px; text-align: left; }
+        #section8 .label.hp  { bottom: -10px; left: -50px; text-align: right; }
+        #section8 .label.int { top: 70px; left: -80px; text-align: right; }
         
-        #slide8 .description-area { width: 500px; flex-shrink: 0; }
-        #slide8 .info-card { background: #fff; border-left: 6px solid var(--brand-color); padding: 25px; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        #slide8 .info-card h3 { font-size: 22px; font-weight: 900; color: var(--text-dark); margin-bottom: 10px; }
-        #slide8 .info-card p { font-size: 15px; color: #475569; font-weight: 700; line-height: 1.7; }
-        #slide8 .legend { display: flex; gap: 40px; margin-top: 10px; }
-        #slide8 .legend-item { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 900; }
-        #slide8 .dot { width: 14px; height: 14px; border-radius: 3px; }
+        #section8 .grid { fill: none; stroke: #e2e8f0; stroke-width: 1.5; }
+        #section8 .poly-before { fill: rgba(239, 68, 68, 0.05); stroke: var(--president-red); stroke-width: 3; stroke-dasharray: 6; }
+        #section8 .poly-after { fill: rgba(0, 123, 138, 0.2); stroke: var(--brand-color); stroke-width: 6; filter: drop-shadow(0 0 10px rgba(0, 123, 138, 0.3)); }
+        
+        #section8 .description-area { width: 500px; flex-shrink: 0; }
+        #section8 .info-card { background: #fff; border-left: 6px solid var(--brand-color); padding: 25px; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        #section8 .info-card h3 { font-size: 22px; font-weight: 900; color: var(--text-dark); margin-bottom: 10px; }
+        #section8 .info-card p { font-size: 15px; color: #475569; font-weight: 700; line-height: 1.7; }
+        #section8 .legend { display: flex; gap: 40px; margin-top: 10px; }
+        #section8 .legend-item { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 900; }
+        #section8 .dot { width: 14px; height: 14px; border-radius: 3px; }
         
         /* Slide 9 specific */
-        #slide9 .main-title { font-size: 44px; font-weight: 900; color: var(--text-dark); margin-bottom: 30px; }
-        #slide9 .main-title span { color: var(--brand-color); }
-        #slide9 .cta-wrapper { display: flex; gap: 60px; width: 1100px; align-items: stretch; }
+        #section9 .main-title { font-size: 44px; font-weight: 900; color: var(--text-dark); margin-bottom: 30px; }
+        #section9 .main-title span { color: var(--brand-color); }
+        #section9 .cta-wrapper { display: flex; gap: 60px; width: 100%; max-width: 1100px; align-items: stretch; }
         
-        #slide9 .quest-detail {
+        @media (max-width: 768px) {
+            #section9 .cta-wrapper { flex-direction: column; gap: 40px; }
+            #section9 .main-title { font-size: 32px; }
+        }
+        
+        #section9 .quest-detail {
             flex: 1; background: #fff; border: 3px solid #e2e8f0; border-radius: 24px;
             padding: 30px; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-        #slide9 .quest-name { font-size: 26px; font-weight: 900; color: var(--text-dark); margin-bottom: 20px; line-height: 1.4; }
-        #slide9 .benefit-item { display: flex; gap: 12px; font-size: 15px; font-weight: 700; color: #475569; margin-bottom: 10px; }
-        #slide9 .benefit-item i { color: var(--brand-color); margin-top: 4px; }
-        #slide9 .btn-summon {
+        #section9 .quest-name { font-size: 26px; font-weight: 900; color: var(--text-dark); margin-bottom: 20px; line-height: 1.4; }
+        #section9 .benefit-item { display: flex; gap: 12px; font-size: 15px; font-weight: 700; color: #475569; margin-bottom: 10px; }
+        #section9 .benefit-item i { color: var(--brand-color); margin-top: 4px; }
+        #section9 .btn-summon {
             background: var(--brand-color); color: #fff; padding: 18px; border-radius: 12px;
             font-size: 20px; font-weight: 900; text-align: center; text-decoration: none;
             box-shadow: 0 6px 0 #005f6a; margin-top: auto; transition: all 0.2s;
         }
-        #slide9 .btn-summon:hover { transform: translateY(2px); box-shadow: 0 4px 0 #005f6a; }
+        #section9 .btn-summon:hover { transform: translateY(2px); box-shadow: 0 4px 0 #005f6a; }
         
-        #slide9 .flow-container { flex: 1; display: flex; flex-direction: column; align-items: center; }
+        #section9 .flow-container { flex: 1; display: flex; flex-direction: column; align-items: center; }
         
-        #slide9 .slot-group { display: flex; flex-direction: column; gap: 12px; width: 340px; }
-        #slide9 .slot-label { font-family: 'Roboto Mono'; font-size: 14px; font-weight: 900; color: #94a3b8; text-align: center; margin-bottom: 8px; }
+        #section9 .slot-group { display: flex; flex-direction: column; gap: 12px; width: 340px; }
+        #section9 .slot-label { font-family: 'Roboto Mono'; font-size: 14px; font-weight: 900; color: #94a3b8; text-align: center; margin-bottom: 8px; }
         
-        #slide9 .slot-card {
+        #section9 .slot-card {
             background: #fff; border: 2px solid var(--accent-yellow); border-radius: 12px; padding: 15px;
             display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 10px rgba(251,191,36,0.1);
         }
-        #slide9 .slot-icon { width: 36px; height: 36px; background: var(--accent-yellow); color: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-        #slide9 .slot-info { flex: 1; }
-        #slide9 .slot-id { display: block; font-family: 'Roboto Mono'; font-size: 11px; font-weight: 900; color: var(--brand-color); }
-        #slide9 .slot-title { font-size: 15px; font-weight: 900; color: var(--text-dark); }
+        #section9 .slot-icon { width: 36px; height: 36px; background: var(--accent-yellow); color: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        #section9 .slot-info { flex: 1; }
+        #section9 .slot-id { display: block; font-family: 'Roboto Mono'; font-size: 11px; font-weight: 900; color: var(--brand-color); }
+        #section9 .slot-title { font-size: 15px; font-weight: 900; color: var(--text-dark); }
         
-        #slide9 .flow-arrow-area { height: 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #cbd5e1; }
-        #slide9 .arrow-v { font-size: 40px; animation: bounceV 2s infinite; color: #e2e8f0; }
+        #section9 .flow-arrow-area { height: 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #cbd5e1; }
+        #section9 .arrow-v { font-size: 40px; animation: bounceV 2s infinite; color: #e2e8f0; }
         
         @keyframes bounceV {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(10px); color: var(--brand-color); }
         }
         
-        #slide9 .final-slot {
+        #section9 .final-slot {
             width: 360px; background: var(--brand-color); border-radius: 20px; padding: 20px;
             color: #fff; text-align: center; box-shadow: 0 15px 35px rgba(0,123,138,0.25);
             border: 4px solid #fff;
         }
-        #slide9 .final-slot-label { font-family: 'Roboto Mono'; font-size: 13px; font-weight: 900; opacity: 0.9; margin-bottom: 8px; display: block; letter-spacing: 0.1em; }
-        #slide9 .final-slot-name { font-size: 24px; font-weight: 900; margin-bottom: 12px; display: block; }
-        #slide9 .final-status { background: rgba(255,255,255,0.2); display: inline-block; padding: 6px 20px; border-radius: 6px; font-size: 14px; font-weight: 900; }
+        #section9 .final-slot-label { font-family: 'Roboto Mono'; font-size: 13px; font-weight: 900; opacity: 0.9; margin-bottom: 8px; display: block; letter-spacing: 0.1em; }
+        #section9 .final-slot-name { font-size: 24px; font-weight: 900; margin-bottom: 12px; display: block; }
+        #section9 .final-status { background: rgba(255,255,255,0.2); display: inline-block; padding: 6px 20px; border-radius: 6px; font-size: 14px; font-weight: 900; }
         
         /* Page Number */
         .page-number {
@@ -531,26 +529,10 @@
     </style>
 </head>
 <body>
-    <!-- Slide Indicator -->
-    <div class="slide-indicator">
-        <span id="currentSlide">1</span> / 9
-    </div>
-
-    <!-- Navigation Controls -->
-    <div class="nav-controls">
-        <button class="nav-btn" id="prevBtn" onclick="previousSlide()" aria-label="前のスライド">
-            ←
-        </button>
-        <button class="nav-btn" id="nextBtn" onclick="nextSlide()" aria-label="次のスライド">
-            →
-        </button>
-    </div>
-
-    <!-- Slides Wrapper for Scaling -->
-    <div class="slides-wrapper" id="slidesWrapper">
+    <!-- LP Content Wrapper -->
     
-    <!-- Slide 1 -->
-    <div class="slide-container active" id="slide1" style="flex-direction: row; align-items: center;">
+    <!-- Section 1 -->
+    <div class="section-container" id="section1" style="flex-direction: row; align-items: center;">
         <div class="text-section">
             <div class="sub-phrase">Your Biz, Our Magic.</div>
             <h1 class="service-title">
@@ -566,7 +548,7 @@
     </div>
 
     <!-- Slide 2 -->
-    <div class="slide-container" id="slide2" style="flex-direction: row; align-items: center;">
+    <div class="section-container" id="section2" style="flex-direction: row; align-items: center;">
         <div class="text-section">
             <h1 class="main-copy">
                 売上は伸びてるが、<br/><span style="color: #ef4444;">守りが手薄。</span>
@@ -609,7 +591,7 @@
     </div>
 
     <!-- Slide 3 -->
-    <div class="slide-container" id="slide3" style="flex-direction: row; align-items: center;">
+    <div class="section-container" id="section3" style="flex-direction: row; align-items: center;">
         <div class="text-section">
             <h1 class="main-copy">
                 理想の編成は、<br>わかっている。<br>
@@ -674,7 +656,7 @@
     </div>
 
     <!-- Slide 4 -->
-    <div class="slide-container" id="slide4" style="flex-direction: row; align-items: center;">
+    <div class="section-container" id="section4" style="flex-direction: row; align-items: center;">
         <div class="text-section">
             <h1 class="main-copy">
                 <span class="text-red-500">「雇う」</span>ではなく<br>
@@ -721,7 +703,7 @@
     </div>
 
     <!-- Slide 5 -->
-    <div class="slide-container" id="slide5" style="align-items: center; justify-content: center;">
+    <div class="section-container" id="section5" style="align-items: center; justify-content: center;">
         <div class="content-frame">
             <div class="left-profile-col">
                 <div class="photo-area" style="overflow: hidden; padding: 0; background: #fff;">
@@ -774,7 +756,7 @@
     </div>
 
     <!-- Slide 6 -->
-    <div class="slide-container" id="slide6" style="align-items: center; justify-content: center;">
+    <div class="section-container" id="section6" style="align-items: center; justify-content: center;">
         <h1 class="main-title">「雇用」というリスクから、<span>「スポット召喚」</span>へ。</h1>
         <table class="comparison-table">
             <thead>
@@ -842,7 +824,7 @@
     </div>
 
     <!-- Slide 7 -->
-    <div class="slide-container" id="slide7" style="align-items: center; justify-content: center;">
+    <div class="section-container" id="section7" style="align-items: center; justify-content: center;">
         <div class="header-area">
             <h1 class="main-title">集中攻略 <span>「3ヶ月クエスト」</span></h1>
             <p class="sub-title">オンライン完結・後方支援に特化した組織の「土台作り」</p>
@@ -899,7 +881,7 @@
     </div>
 
     <!-- Slide 8 -->
-    <div class="slide-container" id="slide8" style="justify-content: flex-start;">
+    <div class="section-container" id="section8" style="justify-content: flex-start;">
         <h1 class="main-title">「会社の突破力」に、<span>「後方支援の魔法」</span>を。</h1>
         <div class="content-wrapper">
             <div class="chart-area">
@@ -939,7 +921,7 @@
     </div>
 
     <!-- Slide 9 -->
-    <div class="slide-container" id="slide9" style="align-items: center; justify-content: center;">
+    <div class="section-container" id="section9" style="align-items: center; justify-content: center;">
         <h1 class="main-title">まずは<span>「体験クエスト」</span>から。</h1>
         <div class="cta-wrapper">
             <div class="quest-detail">
@@ -994,90 +976,6 @@
         </div>
         <div class="page-number">09</div>
     </div>
-    
-    </div><!-- End of slides-wrapper -->
 
-    <script>
-        let currentSlide = 1;
-        const totalSlides = 9;
-
-        // Function to scale slides to fit screen with margin
-        function scaleSlides() {
-            const wrapper = document.getElementById('slidesWrapper');
-            const slideWidth = 1280;
-            const slideHeight = 720;
-            const marginTop = 80; // Top margin for slide indicator
-            const marginBottom = 40; // Bottom margin
-            const marginSide = 100; // Left and right margin for nav buttons
-            
-            const windowWidth = window.innerWidth - (marginSide * 2);
-            const windowHeight = window.innerHeight - marginTop - marginBottom;
-            
-            const scaleX = windowWidth / slideWidth;
-            const scaleY = windowHeight / slideHeight;
-            const scale = Math.min(scaleX, scaleY, 1); // Don't scale up, only down
-            
-            wrapper.style.transform = `scale(${scale})`;
-        }
-
-        function showSlide(n) {
-            // Hide all slides
-            const slides = document.querySelectorAll('.slide-container');
-            slides.forEach(slide => {
-                slide.classList.remove('active');
-            });
-
-            // Show current slide
-            const slideToShow = document.getElementById(`slide${n}`);
-            if (slideToShow) {
-                slideToShow.classList.add('active');
-            }
-
-            // Update slide indicator
-            document.getElementById('currentSlide').textContent = n;
-
-            // Update button states
-            document.getElementById('prevBtn').disabled = (n === 1);
-            document.getElementById('nextBtn').disabled = (n === totalSlides);
-
-            currentSlide = n;
-        }
-
-        function nextSlide() {
-            if (currentSlide < totalSlides) {
-                showSlide(currentSlide + 1);
-            }
-        }
-
-        function previousSlide() {
-            if (currentSlide > 1) {
-                showSlide(currentSlide - 1);
-            }
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'ArrowRight' || event.key === ' ') {
-                event.preventDefault();
-                nextSlide();
-            } else if (event.key === 'ArrowLeft') {
-                event.preventDefault();
-                previousSlide();
-            } else if (event.key === 'Home') {
-                event.preventDefault();
-                showSlide(1);
-            } else if (event.key === 'End') {
-                event.preventDefault();
-                showSlide(totalSlides);
-            }
-        });
-
-        // Initialize
-        showSlide(1);
-        scaleSlides();
-        
-        // Re-scale on window resize
-        window.addEventListener('resize', scaleSlides);
-    </script>
 </body>
 </html>
