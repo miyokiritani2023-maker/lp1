@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Card Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette */
+            --peacock-blue: #007B8A;
+            --saffron-yellow: #E9C46A;
+            --white: #FFFFFF;
+            --light-gray: #F7FAFC;
+            --dark-navy: #1A202C;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #e0f2f4 0%, #f0f4f8 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .card-container {
+            perspective: 1500px;
+        }
+
+        .business-card {
+            width: 91mm;
+            height: 55mm;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 
+                0 20px 60px rgba(0, 123, 138, 0.15),
+                0 8px 20px rgba(0, 123, 138, 0.1);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        /* ギターネック＆手綱モチーフ - 左側の縦のライン */
+        .neck-rein {
+            position: absolute;
+            left: 8px;
+            top: 0;
+            width: 32px;
+            height: 100%;
+            opacity: 0.06;
+            pointer-events: none;
+        }
+
+        /* 右上の幾何学モチーフ - 中間サイズのピック型 */
+        .accent-shape {
+            position: absolute;
+            top: -22px;
+            right: -22px;
+            width: 95px;
+            height: 95px;
+            background: linear-gradient(135deg, var(--peacock-blue) 0%, #006573 100%);
+            transform: rotate(45deg);
+            opacity: 0.9;
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+        }
+
+        .accent-shape::before {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            width: 32px;
+            height: 32px;
+            background: var(--saffron-yellow);
+            transform: rotate(-45deg);
+        }
+
+        /* 6本の弦 - ネックに沿って */
+        .string {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: var(--peacock-blue);
+        }
+
+        .string:nth-child(1) { width: 0.3px; left: 4px; opacity: 0.9; }  /* 1弦 */
+        .string:nth-child(2) { width: 0.4px; left: 9px; opacity: 0.85; } /* 2弦 */
+        .string:nth-child(3) { width: 0.5px; left: 14px; opacity: 0.8; } /* 3弦 */
+        .string:nth-child(4) { width: 0.6px; left: 19px; opacity: 0.75; } /* 4弦 */
+        .string:nth-child(5) { width: 0.7px; left: 24px; opacity: 0.7; } /* 5弦 */
+        .string:nth-child(6) { width: 0.8px; left: 29px; opacity: 0.65; } /* 6弦 */
+
+        /* フレット - 横のライン（手綱を引くイメージも兼ねる） */
+        .fret {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 0.5px;
+            background: linear-gradient(90deg, 
+                var(--peacock-blue) 0%, 
+                var(--peacock-blue) 70%, 
+                transparent 100%);
+        }
+
+        .fret:nth-child(7) { top: 15%; opacity: 0.5; }   /* 3フレット位置 */
+        .fret:nth-child(8) { top: 30%; opacity: 0.45; }  /* 5フレット位置 */
+        .fret:nth-child(9) { top: 45%; opacity: 0.4; }   /* 7フレット位置 */
+        .fret:nth-child(10) { top: 60%; opacity: 0.35; } /* 9フレット位置 */
+        .fret:nth-child(11) { top: 75%; opacity: 0.3; }  /* 12フレット位置 */
+
+        /* フレットマーカー（ポジションマーク） */
+        .fret-markers {
+            position: absolute;
+            left: 38px;
+            top: 0;
+            height: 100%;
+            width: 8px;
+            opacity: 0.08;
+        }
+
+        .fret-dot {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--saffron-yellow);
+            border-radius: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .fret-dot:nth-child(1) { top: 15%; }  /* 3フレット */
+        .fret-dot:nth-child(2) { top: 30%; }  /* 5フレット */
+        .fret-dot:nth-child(3) { top: 45%; }  /* 7フレット */
+        
+        /* 12フレットは2つドット（オクターブ位置） */
+        .fret-dot:nth-child(4) { top: 73%; }
+        .fret-dot:nth-child(5) { top: 77%; }
+
+        /* Subtle background pattern */
+        .card-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(30deg, var(--peacock-blue) 12%, transparent 12.5%, transparent 87%, var(--peacock-blue) 87.5%, var(--peacock-blue)),
+                linear-gradient(150deg, var(--peacock-blue) 12%, transparent 12.5%, transparent 87%, var(--peacock-blue) 87.5%, var(--peacock-blue)),
+                linear-gradient(30deg, var(--peacock-blue) 12%, transparent 12.5%, transparent 87%, var(--peacock-blue) 87.5%, var(--peacock-blue)),
+                linear-gradient(150deg, var(--peacock-blue) 12%, transparent 12.5%, transparent 87%, var(--peacock-blue) 87.5%, var(--peacock-blue));
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+            padding: 20px 24px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Company Logo/Name Area */
+        .company-section {
+        }
+
+        .company-name {
+            font-family: 'Poppins', 'Noto Sans JP', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--peacock-blue);
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .company-tagline {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 9px;
+            font-weight: 400;
+            color: var(--dark-navy);
+            opacity: 0.7;
+            letter-spacing: 0.3px;
+        }
+
+        /* Divider Line */
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--saffron-yellow) 0%, transparent 100%);
+            margin: 12px 0;
+        }
+
+        /* Personal Info Section */
+        .personal-section {
+        }
+
+        .name-title {
+            margin-bottom: 10px;
+        }
+
+        .name {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark-navy);
+            margin-bottom: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        .name-en {
+            font-family: 'Poppins', sans-serif;
+            font-size: 10px;
+            font-weight: 400;
+            color: var(--dark-navy);
+            opacity: 0.6;
+            letter-spacing: 0.8px;
+        }
+
+        .title {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--peacock-blue);
+            margin-top: 3px;
+            letter-spacing: 0.3px;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            margin-top: 8px;
+        }
+
+        .contact-item {
+            font-family: 'Poppins', 'Noto Sans JP', sans-serif;
+            font-size: 8px;
+            color: var(--dark-navy);
+            opacity: 0.75;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.2px;
+        }
+
+        .contact-item::before {
+            content: '';
+            width: 3px;
+            height: 3px;
+            background: var(--saffron-yellow);
+            border-radius: 50%;
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+
+        /* QRコードスペース */
+        .qr-code-placeholder {
+            position: absolute;
+            bottom: 20px;
+            right: 24px;
+            text-align: center;
+        }
+
+        .qr-box {
+            width: 50px;
+            height: 50px;
+            border: 2px dashed var(--peacock-blue);
+            opacity: 0.3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light-gray);
+        }
+
+        .qr-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 7px;
+            color: var(--peacock-blue);
+            opacity: 0.5;
+            margin-top: 3px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Bottom accent */
+        .bottom-accent {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                var(--peacock-blue) 0%, 
+                var(--saffron-yellow) 50%, 
+                var(--peacock-blue) 100%);
+        }
+
+        /* Print-specific styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .business-card {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="business-card">
+            <div class="card-background"></div>
+            
+            <!-- ギターネック＆手綱モチーフ -->
+            <div class="neck-rein">
+                <!-- 6本の弦 -->
+                <div class="string"></div>
+                <div class="string"></div>
+                <div class="string"></div>
+                <div class="string"></div>
+                <div class="string"></div>
+                <div class="string"></div>
+                
+                <!-- フレット（手綱を引くラインのイメージも兼ねる） -->
+                <div class="fret"></div>
+                <div class="fret"></div>
+                <div class="fret"></div>
+                <div class="fret"></div>
+                <div class="fret"></div>
+            </div>
+            
+            <!-- フレットマーカー -->
+            <div class="fret-markers">
+                <div class="fret-dot"></div>
+                <div class="fret-dot"></div>
+                <div class="fret-dot"></div>
+                <div class="fret-dot"></div>
+                <div class="fret-dot"></div>
+            </div>
+            
+            <!-- 右上の幾何学モチーフ -->
+            <div class="accent-shape"></div>
+            
+            <div class="card-content">
+                <div class="company-section">
+                    <div class="company-name">合同会社Co-Lead</div>
+                    <div class="company-tagline">業務・経営支援パートナー</div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="personal-section">
+                    <div class="name-title">
+                        <div class="name">山田 太郎</div>
+                        <div class="name-en">YAMADA TARO</div>
+                    </div>
+                    <div class="title">代表 / MBA</div>
+
+                    <div class="contact-info">
+                        <div class="contact-item">〒123-4567 東京都○○区○○ 1-2-3</div>
+                        <div class="contact-item">MAIL: sample@co-lead.jp</div>
+                    </div>
+                </div>
+                
+                <!-- QRコードスペース -->
+                <div class="qr-code-placeholder">
+                    <div class="qr-box"></div>
+                    <div class="qr-label">QR Code</div>
+                </div>
+            </div>
+
+            <div class="bottom-accent"></div>
+        </div>
+    </div>
+</body>
+</html>
